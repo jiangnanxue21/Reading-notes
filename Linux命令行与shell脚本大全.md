@@ -67,6 +67,64 @@ sed '$a\This is a new line.' data1.txt #理解和insert的不同
 
 This is line number 4.
 This is a new line of text.
+
+# change
+sed '3c\This is a change line of text' data2.txt
+
+This is line number 1.
+This is line number 2.
+This is a change line of text
+This is line number 4.
+```
+7. 转换命令
+
+格式:
+*[address]y/inchars/outchars*
+
+```
+echo "This is a test 12" | sed 'y/12/21/'
+
+This is a test 21
+```
+8. 打印
+
+```
+# 打印行号
+sed '=' data.txt
+
+p # 和-n结合使用
+```
+
+9. 从文件中读取数据然后插入到文件
+
+格式:
+*[address]r filename*
+
+```
+# 将data.txt的内容插入到data1.txt的第三行
+sed '3r data.txt' data1.txt
+
+....
+This is line number 3.
+This is an added line.
+This is the second added line.
+This is line number 4.
+```
+
+10. 小例子
+
+```
+# 找到notice.std中LIST一行，读取data1.txt的内容，进行替换
+sed '/LIST/{
+> r data11.txt
+> d
+> }' notice.std
+Would the following people:
+Blum, R Browncoat
+McGuiness, A Alliance
+Bresnahan, C Browncoat
+Harken, C Alliance
+please report to the ship's captain.
 ```
 
 ## gawk程序
